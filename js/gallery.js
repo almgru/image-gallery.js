@@ -1,6 +1,6 @@
 "use strict";
 
-var gallery = new function() {
+var Gallery = function() {
     this.imageLinks = [];
     this.imageIndex = 0;
     this.fullscreen = false;
@@ -13,13 +13,9 @@ var gallery = new function() {
     var that = this;
 
     this.initialize = function() {
-        var $galleryPopup = $("#gallery-popup");
-
-        $galleryPopup.hide();
-
-        this.imageLinks = getImageLinks();
+        $("#gallery-popup").hide();
+        this.imageLinks = Utils.getDataFromElements("full-src", ".gallery-thumbnail");
         setupEventListeners();
-
         updateMaxDimensions();
     };
 
@@ -39,7 +35,6 @@ var gallery = new function() {
 
     var toggleFullscreen = function() {
         that.fullscreen = !that.fullscreen;
-        updateMaxDimensions();
         updatePopupSize(that.imageLinks[that.imageIndex]);
     };
 
@@ -57,7 +52,9 @@ var gallery = new function() {
         $(document).click(function(e) {
             switch ($(e.target).attr("class")) {
                 case "gallery-thumbnail":
-                    setImageIndex(getIndexOfElement(e.target, ".gallery-thumbnail"));
+                    that.fullscreen = false;
+                    updatePopupSize();
+                    setImageIndex(Utils.getIndexOfElement(e.target, ".gallery-thumbnail"));
                     show();
                     break;
 
@@ -98,19 +95,8 @@ var gallery = new function() {
         });
 
         $(window).resize(function() {
-            updateMaxDimensions();
             updatePopupSize(that.imageLinks[that.imageIndex]);
         });
-    };
-
-    var getImageLinks = function() {
-        var links = [];
-
-        $(".gallery-thumbnail").each(function(i, obj) {
-            links.push($(obj).data("full-src"));
-        });
-
-        return links;
     };
 
     var setImageIndex = function(i) {
@@ -132,7 +118,6 @@ var gallery = new function() {
         $galleryImg.hide();
         $galleryImg.attr("src", imgSrc);
         $("#gallery-load-img").show();
-        console.log("showing");
     };
 
     var updateMaxDimensions = function() {
@@ -148,8 +133,10 @@ var gallery = new function() {
     var updatePopupSize = function(imgSrc) {
         var image = new Image();
 
+        updateMaxDimensions();
+
         image.onload = function() {
-            var dimensions = calculateAspectRatioFit(image.width, image.height, that.maxWidth, that.maxHeight);
+            var dimensions = Utils.calculateAspectRatioFit(image.width, image.height, that.maxWidth, that.maxHeight);
 
             $("#gallery-popup").css({"width": dimensions.width, "height": dimensions.height});
             $("#gallery-img").show();
@@ -157,13 +144,5 @@ var gallery = new function() {
         };
 
         image.src = imgSrc;
-    };
-
-    // Credit to: http://opensourcehacker.com/2011/12/01/calculate-aspect-ratio-conserving-resize-for-images-in-javascript/
-    var calculateAspectRatioFit = function(srcWidth, srcHeight, maxWidth, maxHeight) {
-
-        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-
-        return { width: srcWidth*ratio, height: srcHeight*ratio };
     };
 };
