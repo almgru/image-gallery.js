@@ -20,19 +20,9 @@ var Gallery = function() {
     };
 
     var show = function() {
-        /* Fades out previous image before opening the new one, in case
-           gallery is already open*/
-        if (!that.fullscreen) {
-            $("#gallery-popup").fadeOut(GALLERY_FADE_SPEED, function() {
-                updatePopupSize(that.imageLinks[that.imageIndex]);
-                setImageSrc(that.imageLinks[that.imageIndex]);
-                $("#gallery-popup").fadeIn(GALLERY_FADE_SPEED);
-            });
-        } else {
-            updatePopupSize(that.imageLinks[that.imageIndex]);
-            setImageSrc(that.imageLinks[that.imageIndex]);
-            $("#gallery-popup").fadeIn(GALLERY_FADE_SPEED);
-        }
+        updatePopupSize(that.imageLinks[that.imageIndex]);
+        setImageSrc(that.imageLinks[that.imageIndex]);
+        $("#gallery-popup").fadeIn(GALLERY_FADE_SPEED);
     };
 
     var hide = function() {
@@ -57,12 +47,14 @@ var Gallery = function() {
 
     var next = function() {
         setImageIndex(that.imageIndex + 1);
-        show();
+        updatePopupSize(that.imageLinks[that.imageIndex]);
+        setImageSrc(that.imageLinks[that.imageIndex]);
     };
 
     var previous = function() {
         setImageIndex(that.imageIndex - 1);
-        show();
+        updatePopupSize(that.imageLinks[that.imageIndex]);
+        setImageSrc(that.imageLinks[that.imageIndex]);
     };
 
     var setupEventListeners = function() {

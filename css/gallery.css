@@ -21,12 +21,9 @@
 #gallery-popup {
     position: fixed;
     margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    top: 0; right: 0; bottom: 0; left: 0;
 
-    width: 50%;
+    width: 40%;
     height: 50%;
 
     z-index: 1;
