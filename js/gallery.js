@@ -157,9 +157,7 @@ var Gallery = function() {
             var dimensions = Utils.calculateAspectRatioFit(image.width, image.height, that.maxWidth, that.maxHeight);
 
             $galleryImg.css({"width": dimensions.width, "height": dimensions.height});
-            if (!that.fullscreen) {
-                $("#gallery-popup").css({"width": dimensions.width, "height": dimensions.height});
-            }
+            $("#gallery-popup").css({"width": dimensions.width, "height": dimensions.height});
 
             $galleryImg.show();
             $("#gallery-load-img").hide();
