@@ -62,7 +62,6 @@ var Gallery = function() {
             switch ($(e.target).attr("class")) {
                 case "gallery-thumbnail":
                     that.fullscreen = false;
-                    updatePopupSize();
                     setImageIndex(Utils.getIndexOfElement(e.target, ".gallery-thumbnail"));
                     show();
                     break;
