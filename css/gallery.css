@@ -1,14 +1,13 @@
 .gallery-block {
     position: relative;
-    top: 60px;
-    width: 640px;
-    height: 112px;
-    padding-bottom: 40px;
+    width: 85%;
+    height: auto;
+    margin: 20px auto;
 }
 
 .gallery-thumbnail {
-    width: 200px;
-    height: 112px;
+    width: 30%;
+    height: auto;
 
     border: 1px solid #6f7384;
     margin: 4px;
@@ -27,33 +26,30 @@
     bottom: 0;
     left: 0;
 
-    width: 60%;
-    height: 60%;
-
     z-index: 1;
-    border: 4px groove #6f7384;
+    border: 2px solid #6f7384;
 
     background-color: #000000;
 }
 
 #gallery-img {
     position: absolute;
-    left: 0px;
+    top: 0; right: 0; bottom: 0; left: 0;
     width: 100%;
-    height: 100%;
     clear: both;
+    margin: auto;
 }
 
 #gallery-load-img {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     z-index: 2;
 }
 
 .gallery-button {
+    width: 5%;
+    height: auto;
     position: absolute;
 
     opacity: 0.5;
@@ -63,7 +59,7 @@
     position: relative;
 
     top: 12.5%;
-    width: 150px;
+    width: 15%;
     height: 75%;
 
     opacity: 0;
@@ -93,4 +89,16 @@
 #gallery-maximize {
     right: 0;
     bottom: 0;
+}
+
+@media screen and (max-width:840px) {
+    .gallery-thumbnail {
+        display: block;
+        width: 60%;
+        margin: 4px auto;
+    }
+
+    .gallery-button {
+        width: 12%;
+    }
 }

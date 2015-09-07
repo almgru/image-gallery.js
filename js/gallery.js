@@ -22,20 +22,37 @@ var Gallery = function() {
     var show = function() {
         /* Fades out previous image before opening the new one, in case
            gallery is already open*/
-        $("#gallery-popup").fadeOut(GALLERY_FADE_SPEED, function() {
+        if (!that.fullscreen) {
+            $("#gallery-popup").fadeOut(GALLERY_FADE_SPEED, function() {
+                updatePopupSize(that.imageLinks[that.imageIndex]);
+                setImageSrc(that.imageLinks[that.imageIndex]);
+                $("#gallery-popup").fadeIn(GALLERY_FADE_SPEED);
+            });
+        } else {
             updatePopupSize(that.imageLinks[that.imageIndex]);
             setImageSrc(that.imageLinks[that.imageIndex]);
             $("#gallery-popup").fadeIn(GALLERY_FADE_SPEED);
-        });
+        }
     };
 
     var hide = function() {
-        $("#gallery-popup").fadeOut(GALLERY_FADE_SPEED);
+        $("#gallery-popup").fadeOut(GALLERY_FADE_SPEED, function() {
+            if (that.fullscreen) {
+                Utils.leaveFullscreen("gallery-popup");
+            }
+        });
     };
 
     var toggleFullscreen = function() {
         that.fullscreen = !that.fullscreen;
         updatePopupSize(that.imageLinks[that.imageIndex]);
+
+        if (that.fullscreen) {
+            Utils.enterFullscreen("gallery-popup");
+        }
+        else {
+            Utils.leaveFullscreen("gallery-popup");
+        }
     };
 
     var next = function() {
@@ -136,10 +153,15 @@ var Gallery = function() {
         updateMaxDimensions();
 
         image.onload = function() {
+            var $galleryImg = $("#gallery-img");
             var dimensions = Utils.calculateAspectRatioFit(image.width, image.height, that.maxWidth, that.maxHeight);
 
-            $("#gallery-popup").css({"width": dimensions.width, "height": dimensions.height});
-            $("#gallery-img").show();
+            $galleryImg.css({"width": dimensions.width, "height": dimensions.height});
+            if (!that.fullscreen) {
+                $("#gallery-popup").css({"width": dimensions.width, "height": dimensions.height});
+            }
+
+            $galleryImg.show();
             $("#gallery-load-img").hide();
         };
 

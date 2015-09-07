@@ -26,4 +26,32 @@ var Utils = new function() {
 
         return data;
     };
+
+    this.enterFullscreen = function(elementID) {
+        var element = document.getElementById(elementID);
+
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        }
+    };
+
+    this.leaveFullscreen = function(elementID) {
+        var element = document.getElementById(elementID);
+
+        if (element.requestFullscreen) {
+            document.cancelFullScreen();
+        } else if (element.msRequestFullscreen) {
+            document.msExitFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (element.webkitRequestFullscreen) {
+            document.webkitCancelFullScreen();
+        }
+    };
 };
