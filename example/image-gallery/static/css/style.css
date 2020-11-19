@@ -1,0 +1,104 @@
+.gallery-block {
+    position: relative;
+    width: 85%;
+    height: auto;
+    margin: 20px auto;
+}
+
+.gallery-thumbnail {
+    width: 30%;
+    height: auto;
+
+    border: 1px solid #6f7384;
+    margin: 4px;
+}
+
+.gallery-thumbnail:hover {
+    border-color: #FF8C00;
+    cursor: pointer;
+}
+
+#gallery-popup {
+    position: fixed;
+    margin: auto;
+    top: 0; right: 0; bottom: 0; left: 0;
+
+    width: 40%;
+    height: 50%;
+
+    z-index: 1;
+    border: 2px solid #6f7384;
+
+    background-color: #000000;
+}
+
+#gallery-img {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: auto;
+    clear: both;
+}
+
+#gallery-load-img {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.gallery-button {
+    width: 5%;
+    height: auto;
+    position: absolute;
+
+    opacity: 0.5;
+}
+
+.gallery-arrow {
+    position: relative;
+
+    top: 12.5%;
+    width: 15%;
+    height: 75%;
+
+    opacity: 0;
+}
+
+.gallery-button:hover {
+    cursor: pointer;
+}
+
+.gallery-arrow:hover {
+    cursor: pointer;
+}
+
+#gallery-next {
+    float: right;
+}
+
+#gallery-previous {
+    float: left;
+}
+
+#gallery-close {
+    right: 0;
+    top: 0;
+}
+
+#gallery-maximize {
+    right: 0;
+    bottom: 0;
+}
+
+@media screen and (max-width:840px) {
+    .gallery-thumbnail {
+        display: block;
+        width: 60%;
+        margin: 4px auto;
+    }
+
+    .gallery-button {
+        width: 12%;
+    }
+}

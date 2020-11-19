@@ -4,13 +4,11 @@
   "description": "",
   "private": true,
   "devDependencies": {
-    "http-server": "^0.11.1",
-    "webpack": "^4.16.1",
-    "webpack-cli": "^3.1.0"
+    "http-server": "^0.11.1"
   },
   "scripts": {
-    "build": "webpack-cli",
-    "start": "http-server -p 8080 dist"
+    "build": "./build.sh",
+    "example": "http-server -p 8080 example"
   },
   "repository": {
     "type": "git",
